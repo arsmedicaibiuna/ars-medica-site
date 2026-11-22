@@ -61,8 +61,10 @@ function tabela(titulo, linhas, col) {
 }
 
 async function resumo(url, env) {
-  const chave = url.searchParams.get('chave') || '';
-  if (!env.PAINEL_CHAVE || chave !== env.PAINEL_CHAVE) return new Response('Página não encontrada', { status: 404 });
+  const chave = (url.searchParams.get('chave') || '').trim();
+  const certa = String(env.PAINEL_CHAVE || '').trim();
+  if (!certa) return new Response('Página não encontrada.', { status: 404 });   // segredo ausente (com ponto final)
+  if (chave !== certa) return new Response('Página não encontrada', { status: 404 }); // senha diferente (sem ponto)
   await preparar(env.DB);
   const mes = /^\d{4}-\d{2}$/.test(url.searchParams.get('mes') || '') ? url.searchParams.get('mes') : '';
   const ini = mes ? mes + '-01' : new Date(Date.now() - 3 * 3600e3 - 29 * 864e5).toISOString().slice(0, 10);
