@@ -1,8 +1,15 @@
 {
-  // Ars Medica · site estático + contador anônimo
   "name": "ars-medica",
   "main": "worker/index.js",
   "compatibility_date": "2026-11-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "arsmedica.med.br", "custom_domain": true },
+    { "pattern": "www.arsmedica.med.br", "custom_domain": true },
+    { "pattern": "arsmedicaibiuna.com.br", "custom_domain": true },
+    { "pattern": "www.arsmedicaibiuna.com.br", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
@@ -10,12 +17,8 @@
     "html_handling": "auto-trailing-slash",
     "run_worker_first": true
   },
-  // o banco é criado sozinho no primeiro deploy
   "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "ars-contador"
-    }
+    { "binding": "DB", "database_name": "ars-contador" }
   ],
   "observability": { "enabled": true }
 }
