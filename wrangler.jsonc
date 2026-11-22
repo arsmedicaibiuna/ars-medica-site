@@ -1,0 +1,21 @@
+{
+  // Ars Medica · site estático + contador anônimo
+  "name": "ars-medica",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+    "run_worker_first": true
+  },
+  // o banco é criado sozinho no primeiro deploy
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "ars-contador"
+    }
+  ],
+  "observability": { "enabled": true }
+}
